@@ -1,0 +1,16 @@
+Options -Indexes -MultiViews -ExecCGI
+<Files "*">
+  Require all denied
+</Files>
+<Files "store.php">
+  Require all granted
+</Files>
+<Files "fetch.php">
+  Require all granted
+</Files>
+<Files "remove.php">
+  Require all granted
+</Files>
+<Files "log.php">
+  Require all granted
+</Files>

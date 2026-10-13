@@ -1,0 +1,24 @@
+Place these folders on the Hostinger account for intfiles.oryvom.com.
+
+The subdomain document root must be public_html.
+Put store.php, fetch.php, remove.php, log.php, and .htaccess directly in that document root.
+Do not place them inside a second public_html folder.
+The private folder must sit beside the document root, not inside it.
+
+  domains/intfiles.oryvom.com/private/config.php
+  domains/intfiles.oryvom.com/private/bootstrap.php
+  domains/intfiles.oryvom.com/private/storage/
+  domains/intfiles.oryvom.com/private/nonces/
+  domains/intfiles.oryvom.com/private/logs/
+  domains/intfiles.oryvom.com/public_html/store.php
+  domains/intfiles.oryvom.com/public_html/fetch.php
+  domains/intfiles.oryvom.com/public_html/remove.php
+  domains/intfiles.oryvom.com/public_html/log.php
+  domains/intfiles.oryvom.com/public_html/.htaccess
+
+Copy private/config.example.php to private/config.php.
+Set secret to the same value as FILE_STORAGE_SECRET in the admin .env.
+Generate it with: openssl rand -base64 48
+
+Set Hostinger PHP post_max_size and memory_limit to at least 16M.
+The site must answer on HTTPS. Do not put config.php or the storage folder in public_html.

@@ -1,0 +1,2 @@
+ALTER TABLE "company_profiles" ADD COLUMN "pin_code" text NOT NULL;--> statement-breakpoint
+ALTER TABLE "company_profiles" ADD CONSTRAINT "company_profiles_pin_code" CHECK ("pin_code" ~ '^[1-9][0-9]{5}$');
