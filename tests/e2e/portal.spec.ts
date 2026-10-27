@@ -33,6 +33,10 @@ test("anonymous visitors are sent from protected pages to login", async ({ page 
   await expect(page).toHaveURL(/\/login/);
   await page.goto("/company-data/offices");
   await expect(page).toHaveURL(/\/login/);
+  await page.goto("/shipments");
+  await expect(page).toHaveURL(/\/login/);
+  await page.goto("/shipments/tracking");
+  await expect(page).toHaveURL(/\/login/);
 });
 
 test("protected apis reject anonymous requests", async ({ request }) => {
@@ -40,6 +44,10 @@ test("protected apis reject anonymous requests", async ({ request }) => {
   expect(me.status()).toBe(401);
   const users = await request.get("/api/users");
   expect(users.status()).toBe(401);
+  const transit = await request.post("/api/shipments/rate", { data: {} });
+  expect([401, 403]).toContain(transit.status());
+  const tracking = await request.post("/api/shipments/track", { data: {} });
+  expect([401, 403]).toContain(tracking.status());
   const health = await request.get("/api/health");
   expect(health.status()).toBe(200);
   expect(await health.json()).toEqual({ status: "ok" });

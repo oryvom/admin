@@ -1,7 +1,7 @@
 import type { PermissionKey } from "@/server/policies/permissions";
 import { hasPermission } from "@/server/policies/permissions";
 
-export type DashboardIcon = "users" | "building";
+export type DashboardIcon = "users" | "building" | "truck";
 
 export type DashboardCardModel = {
   id: string;
@@ -63,6 +63,27 @@ const sections: DashboardSection[] = [
         description: "Office records will appear here once they are defined.",
         href: "/company-data/offices",
         permission: "company.offices.read",
+      },
+    ],
+  },
+  {
+    id: "shipments",
+    title: "Shipments",
+    description: "Blue Dart cost for a shipment, and tracking for a waybill or reference number.",
+    icon: "truck",
+    permission: "dashboard.read",
+    links: [
+      {
+        title: "Shipment cost",
+        description: "Enter the weight, boxes, and dimensions, then read the total Blue Dart returns.",
+        href: "/shipments",
+        permission: "dashboard.read",
+      },
+      {
+        title: "Tracking",
+        description: "Look up a waybill or reference number and read the status Blue Dart returns.",
+        href: "/shipments/tracking",
+        permission: "dashboard.read",
       },
     ],
   },

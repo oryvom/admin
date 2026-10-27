@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { SESSION_COOKIE } from "@/lib/auth/cookies";
 import { buildContentSecurityPolicy } from "@/lib/security/csp";
 
-const protectedPrefixes = ["/dashboard", "/users", "/company-data", "/account", "/forbidden"];
+const protectedPrefixes = ["/dashboard", "/users", "/company-data", "/shipments", "/account", "/forbidden"];
 
 export function proxy(request: NextRequest) {
   const requestId = crypto.randomUUID();

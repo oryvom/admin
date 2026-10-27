@@ -18,6 +18,18 @@ const items: NavItem[] = [
     permission: "company.administration.read",
   },
   { href: "/company-data/offices", title: "Offices", terms: ["offices", "office"], permission: "company.offices.read" },
+  {
+    href: "/shipments",
+    title: "Shipments",
+    terms: ["shipments", "shipment", "cost", "rate", "blue dart", "weight"],
+    permission: "dashboard.read",
+  },
+  {
+    href: "/shipments/tracking",
+    title: "Tracking",
+    terms: ["tracking", "track", "waybill", "awb", "shipment status", "blue dart"],
+    permission: "dashboard.read",
+  },
   { href: "/account/security", title: "Security", terms: ["security", "account"], permission: "security.mfa.enroll" },
 ];
 

@@ -34,6 +34,7 @@ Phase A is the application build without a live database. Phase C is the Neon bo
 - [x] Dashboard section cards and popups
 - [x] Users list, search, pagination, detail, create, role change, and suspension
 - [x] Company Data administration and offices empty states
+- [x] Shipments section for Blue Dart cost and tracking
 
 ## Bootstrap
 

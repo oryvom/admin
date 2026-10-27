@@ -21,6 +21,11 @@ const serverEnvSchema = z.object({
   SMTP_FROM: optionalText,
   FILE_STORAGE_BASE_URL: optionalText,
   FILE_STORAGE_SECRET: optionalText,
+  BLUEDART_LOGIN_ID: optionalText,
+  BLUEDART_LICENCE_KEY: optionalText,
+  BLUEDART_API_TYPE: optionalText,
+  BLUEDART_CONSUMER_KEY: optionalText,
+  BLUEDART_CONSUMER_SECRET: optionalText,
   APP_ORIGIN: z.string().url().optional().or(z.literal("")),
   ENABLE_HSTS: z.enum(["true", "false"]).optional().or(z.literal("")),
 });
@@ -46,6 +51,11 @@ export function parseServerEnv(source: NodeJS.ProcessEnv): EnvResult {
     SMTP_FROM: emptyToUndefined(source.SMTP_FROM),
     FILE_STORAGE_BASE_URL: emptyToUndefined(source.FILE_STORAGE_BASE_URL),
     FILE_STORAGE_SECRET: emptyToUndefined(source.FILE_STORAGE_SECRET),
+    BLUEDART_LOGIN_ID: emptyToUndefined(source.BLUEDART_LOGIN_ID),
+    BLUEDART_LICENCE_KEY: emptyToUndefined(source.BLUEDART_LICENCE_KEY),
+    BLUEDART_API_TYPE: emptyToUndefined(source.BLUEDART_API_TYPE),
+    BLUEDART_CONSUMER_KEY: emptyToUndefined(source.BLUEDART_CONSUMER_KEY),
+    BLUEDART_CONSUMER_SECRET: emptyToUndefined(source.BLUEDART_CONSUMER_SECRET),
     APP_ORIGIN: source.APP_ORIGIN,
     ENABLE_HSTS: source.ENABLE_HSTS,
   });

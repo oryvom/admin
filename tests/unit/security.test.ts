@@ -220,7 +220,8 @@ describe("security utilities", () => {
 describe("dashboard", () => {
   it("exposes users and company data sections", () => {
     const sections = visibleDashboardSections(permissions);
-    expect(sections.map((section) => section.title)).toEqual(["Users", "Company Data"]);
+    expect(sections.map((section) => section.title)).toEqual(["Users", "Company Data", "Shipments"]);
+    expect(sections[2]?.links.map((link) => link.href)).toEqual(["/shipments", "/shipments/tracking"]);
     expect(sections[0]?.links[0]?.href).toBe("/users");
     expect(sections[1]?.links.map((link) => link.href)).toEqual([
       "/company-data/administration",

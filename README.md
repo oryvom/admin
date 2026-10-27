@@ -99,6 +99,11 @@ Use the development or initial-setup database while bootstrapping. The bootstrap
 | `FIELD_ENCRYPTION_KEY` | Yes | Base64-encoded 32-byte AES-256-GCM key for TOTP secrets |
 | `APP_ORIGIN` | No | Public origin for CSRF checks behind a proxy, such as `https://admin.example.com` |
 | `ENABLE_HSTS` | No | Set to `true` only after HTTPS is working on the deployment domain |
+| `BLUEDART_LOGIN_ID` | For shipment cost and tracking | Blue Dart login id |
+| `BLUEDART_LICENCE_KEY` | For shipment cost and tracking | Blue Dart licence key |
+| `BLUEDART_API_TYPE` | For shipment cost and tracking | Blue Dart API type, sent with the login id and licence key |
+| `BLUEDART_CONSUMER_KEY` | For tracking | Blue Dart consumer key, sent as the `ClientID` header when requesting a token |
+| `BLUEDART_CONSUMER_SECRET` | For tracking | Blue Dart consumer secret, sent as the `clientSecret` header when requesting a token |
 
 Development and production use the same variable names. Production must set `NODE_ENV=production` through the host, use HTTPS, and keep `ENABLE_HSTS` unset until the certificate is confirmed. Local `next start` on HTTP must leave `ENABLE_HSTS` unset so the browser is not forced onto HTTPS.
 
@@ -193,6 +198,12 @@ Login rate limits are stored in PostgreSQL so they apply across application inst
 Statutory files are sent by this server to `https://intfiles.oryvom.com`. The browser never talks to that host directly. Neon stores the checksum and a random storage id, not the file.
 
 Set `FILE_STORAGE_BASE_URL` and `FILE_STORAGE_SECRET` in `.env`. Copy `hostinger/intfiles` onto the Hostinger account using `hostinger/intfiles/PLACEMENT.txt`. The PHP secret must match `FILE_STORAGE_SECRET`. Keep `private/config.php`, the storage directory, and `private/logs/host.log` outside `public_html`. The administration page can open that log after a failed upload. Re-upload `bootstrap.php`, `log.php`, and `public_html/.htaccess` when those files change.
+
+## Shipments
+
+`/shipments` asks for the origin PIN, destination PIN, weight, number of boxes, length, breadth, height, product codes, shipment type, and declared value. The server calls Blue Dart’s Ver1.11 `GetRateInfo` method with the login id, licence key, and API type. The page shows the total cost Blue Dart returns.
+
+`/shipments/tracking` asks for a waybill or reference number. The server calls `GET https://apigateway.bluedart.com/in/transportation/token/v1/login` with `BLUEDART_CONSUMER_KEY` and `BLUEDART_CONSUMER_SECRET`, stores the returned token locally for 23 hours, and does not commit that file. It then calls `GET https://apigateway.bluedart.com/in/transportation/tracking/v1/shipment` with that token and the tracking query: `handler=tnt`, `loginid`, `numbers`, `format=xml`, `lickey`, `scan=1`, `action=custawbquery`, `verno=1`, and `awb` (`awb` or `Ref`). The page shows the status and scan history from that response.
 
 ## Adding a dashboard section
 

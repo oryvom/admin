@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Building2Icon, UsersIcon } from "lucide-react";
+import { Building2Icon, TruckIcon, UsersIcon } from "lucide-react";
 import { useState } from "react";
 import type { DashboardCardModel, DashboardIcon } from "@/features/dashboard/sections";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,7 @@ import {
 const icons: Record<DashboardIcon, typeof UsersIcon> = {
   users: UsersIcon,
   building: Building2Icon,
+  truck: TruckIcon,
 };
 
 export function SectionGrid({ sections }: { sections: DashboardCardModel[] }) {
